@@ -1,0 +1,14 @@
+apply from: "$rootDir/gradle/feature.gradle"
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+
+
+
+
+
+
+
+
+}

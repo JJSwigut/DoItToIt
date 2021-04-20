@@ -1,0 +1,5 @@
+include ':app'
+include ':core'
+include ':data'
+include ':feature'
+rootProject.name = "DoitToit"

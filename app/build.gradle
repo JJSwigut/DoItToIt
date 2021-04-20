@@ -1,0 +1,30 @@
+apply from: "$rootDir/gradle/application.gradle"
+
+
+
+dependencies {
+
+    implementation project (':core')
+    implementation project (":data")
+    implementation project (":feature")
+
+    implementation "androidx.core:core-ktx:$core_ktx"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_livedata_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_viewmodel_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_fragment_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_ui_version"
+
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_lifecycle_viewmodel"
+    kapt "androidx.hilt:hilt-compiler:$hilt_compiler"
+
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$test_ext_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
+}

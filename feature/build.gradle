@@ -1,0 +1,18 @@
+apply from: "$rootDir/gradle/feature.gradle"
+
+android{
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':core')
+
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+
+}
