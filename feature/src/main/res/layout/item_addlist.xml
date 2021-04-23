@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/addCard"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="4dp"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="16dp"
+    app:contentPadding="@dimen/card_item_content_padding"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp">
 

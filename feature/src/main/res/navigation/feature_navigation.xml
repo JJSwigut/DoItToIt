@@ -7,13 +7,42 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.jjswigut.feature.views.HomeFragment"
-        android:label="HomeFragment">
+        android:label="Lists">
         <action
-            android:id="@+id/action_homeFragment_to_createListFragment"
-            app:destination="@id/createListFragment" />
+            android:id="@+id/home_to_add"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/home_to_list"
+            app:destination="@id/listFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/addFragment"
+        android:name="com.jjswigut.feature.views.AddFragment"
+        android:label="Tasks">
+        <action
+            android:id="@+id/add_to_home"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="listOrTask"
+            app:argType="integer" />
+        <action
+            android:id="@+id/add_to_list"
+            app:destination="@id/listFragment" />
+        <argument
+            android:name="parentListId"
+            android:defaultValue="-1L"
+            app:argType="long" />
+    </dialog>
     <fragment
-        android:id="@+id/createListFragment"
+        android:id="@+id/listFragment"
         android:name="com.jjswigut.feature.views.ListFragment"
-        android:label="CreateListFragment" />
+        android:label="Tasks">
+        <action
+            android:id="@+id/list_to_add"
+            app:destination="@id/addFragment" />
+        <argument
+            android:name="listId"
+            android:defaultValue="-1L"
+            app:argType="long" />
+    </fragment>
 </navigation>

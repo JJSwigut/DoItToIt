@@ -27,7 +27,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = ListAdapter()
+        adapter = ListAdapter(viewModel)
 
     }
 
@@ -46,6 +46,7 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         observeLists()
         setupRecyclers()
     }
+
 
     private fun setupRecyclers() {
 
@@ -66,5 +67,6 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
             }
         })
     }
+
 
 }

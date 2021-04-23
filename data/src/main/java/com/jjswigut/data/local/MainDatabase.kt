@@ -8,7 +8,7 @@ import com.jjswigut.data.local.entities.TaskEntity
 
 @Database(
     entities = [TaskEntity::class, ListEntity::class],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 
