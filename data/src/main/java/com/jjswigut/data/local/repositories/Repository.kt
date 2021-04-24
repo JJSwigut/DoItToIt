@@ -24,6 +24,4 @@ class Repository @Inject constructor(
     suspend fun deleteList(listId: Long) = dao.deleteList(listId)
 
     suspend fun deleteTask(task: TaskEntity) = dao.deleteTask(task)
-
 }
-

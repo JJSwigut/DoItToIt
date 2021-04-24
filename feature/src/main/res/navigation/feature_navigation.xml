@@ -2,40 +2,44 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/feature_navigation"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/listsFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.jjswigut.feature.views.HomeFragment"
+        android:id="@+id/listsFragment"
+        android:name="com.jjswigut.feature.lists.ListsFragment"
         android:label="Lists">
         <action
             android:id="@+id/home_to_add"
             app:destination="@id/addFragment" />
         <action
             android:id="@+id/home_to_list"
-            app:destination="@id/listFragment" />
+            app:destination="@id/tasksFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <dialog
         android:id="@+id/addFragment"
-        android:name="com.jjswigut.feature.views.AddFragment"
+        android:name="com.jjswigut.feature.add.AddFragment"
         android:label="Tasks">
         <action
             android:id="@+id/add_to_home"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/listsFragment" />
         <argument
             android:name="listOrTask"
             app:argType="integer" />
         <action
             android:id="@+id/add_to_list"
-            app:destination="@id/listFragment" />
+            app:destination="@id/tasksFragment" />
         <argument
             android:name="parentListId"
             android:defaultValue="-1L"
             app:argType="long" />
     </dialog>
     <fragment
-        android:id="@+id/listFragment"
-        android:name="com.jjswigut.feature.views.ListFragment"
+        android:id="@+id/tasksFragment"
+        android:name="com.jjswigut.feature.tasks.TasksFragment"
         android:label="Tasks">
         <action
             android:id="@+id/list_to_add"

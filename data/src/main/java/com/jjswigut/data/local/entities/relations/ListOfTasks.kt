@@ -9,9 +9,7 @@ data class ListOfTasks(
     @Embedded val list: ListEntity,
     @Relation(
         parentColumn = "listId",
-        entityColumn = "parentListId",
-
-
-        )
+        entityColumn = "parentListId"
+    )
     var tasks: List<TaskEntity>
 )
