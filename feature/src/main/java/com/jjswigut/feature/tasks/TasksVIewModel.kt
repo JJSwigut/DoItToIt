@@ -50,5 +50,4 @@ class TasksVIewModel @Inject constructor(
     fun onUndoDeleteClick(task: TaskEntity) = viewModelScope.launch {
         repo.addTask(task)
     }
-
 }

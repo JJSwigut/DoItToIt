@@ -111,7 +111,7 @@ class ListsFragment : BaseFragment<ListsViewModel>() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val list = adapter.elements[viewHolder.adapterPosition]
-                viewModel.onListSwiped(list)
+                viewModel.onListSwiped(list, viewHolder.adapterPosition)
             }
 
             override fun getSwipeDirs(
@@ -135,20 +135,27 @@ class ListsFragment : BaseFragment<ListsViewModel>() {
                             BaseTransientBottomBar.LENGTH_LONG
                         )
                             .setAction("UNDO") {
-                                adapter.notifyDataSetChanged()
-                            }.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
-                                override fun onDismissed(
-                                    transientBottomBar: Snackbar?,
-                                    event: Int
-                                ) {
-                                    super.onDismissed(transientBottomBar, event)
-                                    viewModel.deleteList(swipe.list.listId)
-                                }
-                            }).show()
-
+                                undoDelete(swipe)
+                            }.addCallback(onDismissCallback(swipe)).show()
                     }
                 }
             }
         }
     }
+
+    private fun undoDelete(swipeEvent: SwipeEvent.ShowUndoDeleteListMessage) {
+        viewModel.listDeleted = false
+        adapter.notifyItemChanged(swipeEvent.position)
+    }
+
+    private fun onDismissCallback(swipe: SwipeEvent.ShowUndoDeleteListMessage) =
+        object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+            override fun onDismissed(
+                transientBottomBar: Snackbar?,
+                event: Int
+            ) {
+                super.onDismissed(transientBottomBar, event)
+                viewModel.deleteIfDone(swipe)
+            }
+        }
 }

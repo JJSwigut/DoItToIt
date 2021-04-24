@@ -22,6 +22,8 @@ class ListsViewModel @Inject constructor(
     private val repo: Repository
 ) : BaseViewModel() {
 
+    var listDeleted = true
+
     private val listsEventChannel = Channel<SwipeEvent>()
     val listsEvent = listsEventChannel.receiveAsFlow()
 
@@ -37,15 +39,15 @@ class ListsViewModel @Inject constructor(
         }
     }
 
-    fun deleteList(listId: Long) = viewModelScope.launch { repo.deleteList(listId) }
+    private fun deleteList(listId: Long) = viewModelScope.launch { repo.deleteList(listId) }
 
-    fun onListSwiped(list: ListEntity) = viewModelScope.launch {
-
-//        repo.deleteList(list.listId)
-        listsEventChannel.send(SwipeEvent.ShowUndoDeleteListMessage(list))
+    fun onListSwiped(list: ListEntity, position: Int) = viewModelScope.launch {
+        listsEventChannel.send(SwipeEvent.ShowUndoDeleteListMessage(list, position))
     }
 
-    fun onUndoDeleteClick(list: ListEntity) = viewModelScope.launch {
-        repo.addList(list)
+    fun deleteIfDone(swipe: SwipeEvent.ShowUndoDeleteListMessage) {
+        if (listDeleted) {
+            deleteList(swipe.list.listId)
+        } else listDeleted = true
     }
 }
