@@ -14,5 +14,4 @@ import com.jjswigut.data.local.entities.TaskEntity
 
 abstract class MainDatabase : RoomDatabase() {
     abstract fun dao(): Dao
-
 }

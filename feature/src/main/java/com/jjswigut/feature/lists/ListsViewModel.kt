@@ -1,4 +1,4 @@
-package com.jjswigut.feature.viewmodels
+package com.jjswigut.feature.lists
 
 import android.content.ContentValues.TAG
 import android.util.Log
@@ -6,7 +6,8 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.jjswigut.core.base.BaseViewModel
 import com.jjswigut.core.utils.State
-import com.jjswigut.data.local.entities.TaskEntity
+import com.jjswigut.data.local.SwipeEvent
+import com.jjswigut.data.local.entities.ListEntity
 import com.jjswigut.data.local.repositories.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,19 +18,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ListViewModel @Inject constructor(
+class ListsViewModel @Inject constructor(
     private val repo: Repository
 ) : BaseViewModel() {
 
-    private val tasksEventChannel = Channel<TasksEvent>()
-    val tasksEvent = tasksEventChannel.receiveAsFlow()
+    private val listsEventChannel = Channel<SwipeEvent>()
+    val listsEvent = listsEventChannel.receiveAsFlow()
 
-    var listId: Long = -1
-
-    fun getListOfTasks(listId: Long) = liveData(Dispatchers.IO) {
+    val allLists = liveData(Dispatchers.IO) {
         emit(State.Loading)
         try {
-            repo.getListOfTasks(listId).collect { lists ->
+            repo.allLists.collect { lists ->
                 emit(State.Success(lists))
             }
         } catch (exception: Exception) {
@@ -38,21 +37,15 @@ class ListViewModel @Inject constructor(
         }
     }
 
-    fun deleteList(listId: Long) {
-        viewModelScope.launch { repo.deleteList(listId) }
+    fun deleteList(listId: Long) = viewModelScope.launch { repo.deleteList(listId) }
+
+    fun onListSwiped(list: ListEntity) = viewModelScope.launch {
+
+//        repo.deleteList(list.listId)
+        listsEventChannel.send(SwipeEvent.ShowUndoDeleteListMessage(list))
     }
 
-    fun onTaskSwiped(task: TaskEntity) = viewModelScope.launch {
-        repo.deleteTask(task)
-        tasksEventChannel.send(TasksEvent.ShowUndoDeleteTaskMessage(task))
-    }
-
-    fun onUndoDeleteClick(task: TaskEntity) = viewModelScope.launch {
-        repo.addTask(task)
-    }
-
-
-    sealed class TasksEvent {
-        data class ShowUndoDeleteTaskMessage(val task: TaskEntity) : TasksEvent()
+    fun onUndoDeleteClick(list: ListEntity) = viewModelScope.launch {
+        repo.addList(list)
     }
 }

@@ -10,6 +10,4 @@ data class ListEntity(
     val listId: Long = 0,
     @ColumnInfo
     val name: String
-) {
-
-}
+)

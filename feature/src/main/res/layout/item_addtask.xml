@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="8dp"
     android:layout_marginVertical="4dp"
+    android:animateLayoutChanges="true"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
     app:contentPadding="@dimen/card_item_content_padding">
@@ -15,7 +16,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -27,8 +28,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="4dp"
-            android:text="Add Task"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="8dp"
+            android:text="@string/add_task"
+            android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold" />
 

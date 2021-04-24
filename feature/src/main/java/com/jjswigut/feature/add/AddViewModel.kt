@@ -1,4 +1,4 @@
-package com.jjswigut.feature.viewmodels
+package com.jjswigut.feature.add
 
 import androidx.lifecycle.viewModelScope
 import com.jjswigut.core.base.BaseViewModel

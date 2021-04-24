@@ -7,7 +7,6 @@ import com.jjswigut.data.local.entities.TaskEntity
 import com.jjswigut.data.local.entities.relations.ListOfTasks
 import kotlinx.coroutines.flow.Flow
 
-
 @Dao
 interface Dao {
 
