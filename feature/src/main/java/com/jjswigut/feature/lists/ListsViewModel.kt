@@ -42,10 +42,10 @@ class ListsViewModel @Inject constructor(
     private fun deleteList(listId: Long) = viewModelScope.launch { repo.deleteList(listId) }
 
     fun onListSwiped(list: ListEntity, position: Int) = viewModelScope.launch {
-        listsEventChannel.send(SwipeEvent.ShowUndoDeleteListMessage(list, position))
+        listsEventChannel.send(SwipeEvent.DeleteList(list, position))
     }
 
-    fun deleteIfDone(swipe: SwipeEvent.ShowUndoDeleteListMessage) {
+    fun deleteIfDone(swipe: SwipeEvent.DeleteList) {
         if (listDeleted) {
             deleteList(swipe.list.listId)
         } else listDeleted = true

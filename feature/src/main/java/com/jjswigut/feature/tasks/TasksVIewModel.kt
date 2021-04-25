@@ -22,6 +22,8 @@ class TasksVIewModel @Inject constructor(
     private val repo: Repository
 ) : BaseViewModel() {
 
+    var taskDeleted = true
+
     private val tasksEventChannel = Channel<SwipeEvent>()
     val tasksEvent = tasksEventChannel.receiveAsFlow()
 
@@ -37,17 +39,25 @@ class TasksVIewModel @Inject constructor(
         }
     }
 
+    fun updateTask(task: TaskEntity) {
+        viewModelScope.launch { repo.updateTask(task) }
+    }
+
     fun deleteList(listId: Long) {
         viewModelScope.launch { repo.deleteList(listId) }
     }
 
-    fun onTaskSwiped(task: TaskEntity) = viewModelScope.launch {
-
-        repo.deleteTask(task)
-        tasksEventChannel.send(SwipeEvent.ShowUndoDeleteTaskMessage(task))
+    private fun deleteTask(task: TaskEntity) {
+        viewModelScope.launch { repo.deleteTask(task) }
     }
 
-    fun onUndoDeleteClick(task: TaskEntity) = viewModelScope.launch {
-        repo.addTask(task)
+    fun onTaskSwiped(task: TaskEntity, position: Int) = viewModelScope.launch {
+        tasksEventChannel.send(SwipeEvent.DeleteTask(task, position))
+    }
+
+    fun deleteIfDone(swipe: SwipeEvent.DeleteTask) {
+        if (taskDeleted) {
+            deleteTask(swipe.task)
+        } else taskDeleted = true
     }
 }

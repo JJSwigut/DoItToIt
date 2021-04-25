@@ -5,6 +5,15 @@
     app:startDestination="@+id/feature_navigation">
 
     <include app:graph="@navigation/feature_navigation" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.jjswigut.feature.settings.SettingsFragment"
+        android:label="SettingsFragment">
+
+        <deepLink
+            android:id="@+id/settingsFragment"
+            app:uri="Doittoit://SettingsFragment" />
+    </fragment>
 
 
 </navigation>

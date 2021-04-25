@@ -20,6 +20,7 @@ import com.jjswigut.core.base.BaseFragment
 import com.jjswigut.core.utils.State
 import com.jjswigut.data.local.CardAction
 import com.jjswigut.data.local.SwipeEvent
+import com.jjswigut.feature.R
 import com.jjswigut.feature.databinding.FragmentListsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -70,8 +71,15 @@ class ListsFragment : BaseFragment<ListsViewModel>() {
     private fun setUpToolbar() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        binding.toolbar
-            .setupWithNavController(navController, appBarConfiguration)
+        with(binding.toolbar) {
+            setupWithNavController(navController, appBarConfiguration)
+            setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.settings -> navController.navigate(ListsFragmentDirections.listToSettings2())
+                }
+                true
+            }
+        }
     }
 
     private fun observeLists() {
@@ -80,7 +88,7 @@ class ListsFragment : BaseFragment<ListsViewModel>() {
                 is State.Loading -> Log.d(TAG, "observeLists: loading")
                 is State.Success -> result.data.let { adapter.updateData(it) }
                 is State.Failed -> Log.d(TAG, "observeLists: ${result.message}")
-                else -> Log.d(TAG, "observeLists: dang")
+                else -> Log.d(TAG, "observeLists: No such state")
             }
         })
     }
@@ -128,7 +136,7 @@ class ListsFragment : BaseFragment<ListsViewModel>() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.listsEvent.collect { swipe ->
                 when (swipe) {
-                    is SwipeEvent.ShowUndoDeleteListMessage -> {
+                    is SwipeEvent.DeleteList -> {
                         Snackbar.make(
                             requireView(),
                             "List deleted",
@@ -143,12 +151,12 @@ class ListsFragment : BaseFragment<ListsViewModel>() {
         }
     }
 
-    private fun undoDelete(swipeEvent: SwipeEvent.ShowUndoDeleteListMessage) {
+    private fun undoDelete(swipeEvent: SwipeEvent.DeleteList) {
         viewModel.listDeleted = false
         adapter.notifyItemChanged(swipeEvent.position)
     }
 
-    private fun onDismissCallback(swipe: SwipeEvent.ShowUndoDeleteListMessage) =
+    private fun onDismissCallback(swipe: SwipeEvent.DeleteList) =
         object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
             override fun onDismissed(
                 transientBottomBar: Snackbar?,

@@ -54,7 +54,7 @@ class TaskAdapter(private val clickHandler: ClickHandler) :
                     parent, false
                 )
             )
-            else -> throw Exception("Nope")
+            else -> throw Exception("No ViewHolder available for this")
         }
     }
 
@@ -79,8 +79,12 @@ class TaskAdapter(private val clickHandler: ClickHandler) :
 
         fun bind(item: TaskEntity) {
             nameView.text = item.body
-            taskCard.setOnClickListener {
-                taskCheckView.isChecked = !taskCheckView.isChecked
+            if (item.isComplete) {
+                taskCheckView.isChecked = true
+            }
+            taskCheckView.setOnCheckedChangeListener { _, _ ->
+                item.isComplete = !item.isComplete
+                clickHandler(CardAction.TaskCardChecked(item))
             }
         }
     }

@@ -21,6 +21,8 @@ class Repository @Inject constructor(
 
     suspend fun addTask(task: TaskEntity) = dao.insertTask(task)
 
+    suspend fun updateTask(task: TaskEntity) = dao.updateTask(task)
+
     suspend fun deleteList(listId: Long) = dao.deleteList(listId)
 
     suspend fun deleteTask(task: TaskEntity) = dao.deleteTask(task)

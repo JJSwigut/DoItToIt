@@ -12,8 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         android:animateLayoutChanges="true"
         android:backgroundTint="#FFFFFF"
-        app:menu="@menu/options_menu"
-        app:titleTextColor="#444444" />
+        app:menu="@menu/options_menu" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listRecycler"

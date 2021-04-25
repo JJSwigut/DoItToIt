@@ -18,6 +18,13 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/list_to_settings2"
+            app:destination="@id/settingsDialogFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <dialog
         android:id="@+id/addFragment"
@@ -48,5 +55,16 @@
             android:name="listId"
             android:defaultValue="-1L"
             app:argType="long" />
+        <action
+            android:id="@+id/tasks_to_settings2"
+            app:destination="@id/settingsDialogFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
+    <dialog
+        android:id="@+id/settingsDialogFragment"
+        android:name="com.jjswigut.feature.settings.SettingsDialogFragment"
+        android:label="SettingsDialogFragment" />
 </navigation>

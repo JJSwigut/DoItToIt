@@ -17,5 +17,6 @@ data class TaskEntity(
     @PrimaryKey(autoGenerate = true)
     val taskId: Long = 0,
     val parentListId: Long,
-    val body: String
+    val body: String,
+    var isComplete: Boolean = false
 )

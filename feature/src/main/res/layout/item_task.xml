@@ -32,7 +32,6 @@
             android:gravity="center"
             android:textAlignment="center"
             android:padding="4dp"
-            android:text="First Task"
             android:textSize="20sp"
             android:textStyle="bold" />
 
