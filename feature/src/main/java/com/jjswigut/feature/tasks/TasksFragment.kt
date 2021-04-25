@@ -81,7 +81,7 @@ class TasksFragment : BaseBottomSheetDialogFragment<TasksVIewModel>() {
                     adapter.updateData(it[0].tasks)
                 }
                 is State.Failed -> Log.d(TAG, "observeListOfTasks: ${result.message}")
-                else -> Log.d(TAG, "observeListOfTasks: dang")
+                else -> Log.d(TAG, "observeListOfTasks: No such state")
             }
         })
     }
@@ -89,13 +89,17 @@ class TasksFragment : BaseBottomSheetDialogFragment<TasksVIewModel>() {
     private fun setUpToolbar() {
         val navController = findNavController()
         val appBarConfiguration = AppBarConfiguration(navController.graph)
-        binding.toolbar
-            .setupWithNavController(navController, appBarConfiguration)
-        binding.toolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.deleteIcon -> setupDelete(args.listId)
+        with(binding.toolbar) {
+            setupWithNavController(navController, appBarConfiguration)
+            setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.deleteIcon -> setupDelete(args.listId)
+                    R.id.settings -> {
+                        viewModel.navigate(TasksFragmentDirections.tasksToSettings2())
+                    }
+                }
+                true
             }
-            true
         }
     }
 
@@ -126,6 +130,9 @@ class TasksFragment : BaseBottomSheetDialogFragment<TasksVIewModel>() {
                     )
                 )
             }
+            is CardAction.TaskCardChecked -> {
+                viewModel.updateTask(click.task)
+            }
         }
     }
 
@@ -144,7 +151,7 @@ class TasksFragment : BaseBottomSheetDialogFragment<TasksVIewModel>() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val task = adapter.elements[viewHolder.adapterPosition]
-                viewModel.onTaskSwiped(task)
+                viewModel.onTaskSwiped(task, viewHolder.adapterPosition)
             }
 
             override fun getSwipeDirs(
@@ -159,20 +166,36 @@ class TasksFragment : BaseBottomSheetDialogFragment<TasksVIewModel>() {
 
     private fun setUpSwipeEvent() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.tasksEvent.collect { event ->
-                when (event) {
-                    is SwipeEvent.ShowUndoDeleteTaskMessage -> {
+            viewModel.tasksEvent.collect { swipe ->
+                when (swipe) {
+                    is SwipeEvent.DeleteTask -> {
                         Snackbar.make(
                             requireView(),
                             "Task deleted",
                             BaseTransientBottomBar.LENGTH_LONG
                         )
                             .setAction("UNDO") {
-                                viewModel.onUndoDeleteClick(event.task)
-                            }.show()
+                                undoDelete(swipe)
+                            }.addCallback(onDismissCallback(swipe)).show()
                     }
                 }
             }
         }
     }
+
+    private fun undoDelete(swipeEvent: SwipeEvent.DeleteTask) {
+        viewModel.taskDeleted = false
+        adapter.notifyItemChanged(swipeEvent.position)
+    }
+
+    private fun onDismissCallback(swipe: SwipeEvent.DeleteTask) =
+        object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+            override fun onDismissed(
+                transientBottomBar: Snackbar?,
+                event: Int
+            ) {
+                super.onDismissed(transientBottomBar, event)
+                viewModel.deleteIfDone(swipe)
+            }
+        }
 }

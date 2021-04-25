@@ -12,8 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         android:animateLayoutChanges="true"
         android:backgroundTint="#FFFFFF"
-        app:menu="@menu/delete_menu"
-        app:titleTextColor="#444444" />
+        app:menu="@menu/delete_menu" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/listDetailCard"
@@ -35,8 +34,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/standard_margin"
-                android:gravity="center_horizontal"
+                android:fontFamily="@font/josefin_sans_semibold"
 
+                android:gravity="center_horizontal"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
