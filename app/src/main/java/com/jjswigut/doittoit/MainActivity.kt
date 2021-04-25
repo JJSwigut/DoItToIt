@@ -43,6 +43,4 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         super.onStop()
         sharedPrefs.unregisterOnSharedPreferenceChangeListener(this)
     }
-
-
 }
