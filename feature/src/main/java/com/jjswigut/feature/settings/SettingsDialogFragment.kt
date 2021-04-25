@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -40,16 +39,9 @@ class SettingsDialogFragment : DialogFragment() {
         with(binding) {
             with(viewModel) {
                 darkModeSwitch.isChecked = getDarkModePref()
-                darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
-                    if (isChecked) {
-                        saveDarkModePref(isChecked)
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    } else {
-                        saveDarkModePref(!isChecked)
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    }
-                }
+
                 saveButton.setOnClickListener {
+                    saveDarkModePref(binding.darkModeSwitch.isChecked)
                     findNavController().navigateUp()
                 }
             }
