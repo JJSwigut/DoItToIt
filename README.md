@@ -12,11 +12,15 @@
 
 # Description
 
-  DoitToit was made as part of a coding challenge for Branch Payments. Able to create many Lists of To-Dos, this was a fun project that
+    DoitToit was made as part of a coding challenge for Branch Payments. Able to create many Lists of To-Dos, this was a fun project that
 gave me the chance to learn some new things! I fell in love with Kotlin Flows while working on this project, as I hadn't previously implemented them in anything.
 I chose to use a modular architecture to separate concerns, but was excited to learn how to implement Navigation Component in a multi-module project.
 I also spent more time on design and the overall asthetics in this project. Another feature I'm proud of is using ItemTouchHelper to implement
 a swipe-to-delete function, as well as showing a classic "UNDO" snackbar for those pesky swiping mistakes!
+
+I did encounter a few struggles, the most disappointing being testing. I had planned to unit-test my ViewModels, and then do some instrumented tests
+on the databases. My hope was to assert that TaskEntity and ListEntity maintained integrity up on insertion and retrieval from the database using a FakeRepository.  As I began, I realized that the heavy use of Flow and LiveData in my app, testing would require some special provisions that I didn't have
+time to read up on. Another was in the checkboxes on the Tasks. When checked, they it updates var in the TaskEntity which is then updated in Room. The change in the database triggers a Flow collection and the list gets updated causing the item to be redrawn in the Recycler View and subsequently a quick flash. I thought about holding the value somewhere and updating room when the page was navigated away from. I realized this too late in the challenge to implement.
 
 
 # Tech
@@ -27,7 +31,7 @@ aesthetically pleasing user interfaces.
 request. This enables it to remain a reliable source of information even offline.
 <h5>LiveData</h5> Used to emit and observe streams of data in realtime to update the UI while remaining
 LifeCycle aware.
-<h5>Kotlin Flow</> Flow is a "cold" stream that produces values asynchronously and sequentially. Super Cool! Built on
+<h5>Kotlin Flow</h5> Flow is a "cold" stream that produces values asynchronously and sequentially. Super Cool! Built on
   top of coroutines, it's my new favorite thing! Used to keep lifecycle-aware Livedata out of my repository layer.
 <h5>Coroutines</h5> Asynchronous operations handled by Kotlin Coroutines. Keeping database queries and
 other heavy lifting off of the main thread for an uninterrupted user experience while also
@@ -41,10 +45,10 @@ reducing the need for callbacks.
 
 # Screenshots
 <p align = "center">
-<img src = "listspiclight.png" height = "400" width = "200" >
-<img src = "taskspiclight.png" height = "400" width = "200" >
-<img src = "darkmodepic.png" height = "400" width = "200" >
-<img src = "addlistpic.png" height = "400" width = "200" >
+<img src = "ListsPicLight.png" height = "400" width = "200" >
+<img src = "TasksPicLight.png" height = "400" width = "200" >
+<img src = "Darkmodepic.png" height = "400" width = "200" >
+<img src = "AddListPic.png" height = "400" width = "200" >
 
   </p>
 
