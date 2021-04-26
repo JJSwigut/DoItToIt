@@ -12,7 +12,7 @@
 
 # Description
 
-    DoitToit was made as part of a coding challenge for Branch Payments. Able to create many Lists of To-Dos, this was a fun project that
+DoitToit was made as part of a coding challenge for Branch Payments. Able to create many Lists of To-Dos, this wa a fun project that
 gave me the chance to learn some new things! I fell in love with Kotlin Flows while working on this project, as I hadn't previously implemented them in anything.
 I chose to use a modular architecture to separate concerns, but was excited to learn how to implement Navigation Component in a multi-module project.
 I also spent more time on design and the overall asthetics in this project. Another feature I'm proud of is using ItemTouchHelper to implement
