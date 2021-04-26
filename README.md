@@ -26,7 +26,7 @@ on the databases. My hope was to assert that TaskEntity and ListEntity maintaine
 FakeRepository.  As I began, I realized that the with the  heavy use of Flow and LiveData in my app, testing would require some special provisions that I didn't 
 have time to read up on. Another was in the checkboxes on the Tasks. When checked, it updates a var in the TaskEntity and an onCheckChangedListener then updates it in Room. The change in the database triggers a Flow collection and the list gets updated causing the item to be redrawn in the Recycler View and subsequently a quick flash. I think the solution is holding the value somewhere and updating room when the page was navigated away from. I realized this too late in the challenge to implement.
 
-Last thing - I realize the logo should have had a hyphen "Do-it To-it" so it doesn't sound look like "dɔɪt tɔɪt"(phonetics). Capital I's look like l's in that font.
+Last thing - I realize the logo should have had a hyphen "Do-it To-it" so it doesn't sound look like "dɔɪt tɔɪt"(phonetics). And Capital I's(eyes) look like l's(ells) in that font, so capitalizing them wouldn't have been any better. One day I'll make a new logo for it.:)
 
 
 # Tech
