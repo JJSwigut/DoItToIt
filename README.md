@@ -1,0 +1,75 @@
+<p align = "center">
+  <img src = "doittoitlogobanner.png" >
+  </p>
+
+<p align = "center">
+  <a href="#description">Description</a> -
+  <a href="#tech">Tech</a> -
+  <a href="#screenshots">Screenshots</a> -
+  <a href="#license">License</a>
+  </p>
+
+
+# Description
+
+  DoitToit was made as part of a coding challenge for Branch Payments. Able to create many Lists of To-Dos, this was a fun project that
+gave me the chance to learn some new things! I fell in love with Kotlin Flows while working on this project, as I hadn't previously implemented them in anything.
+I chose to use a modular architecture to separate concerns, but was excited to learn how to implement Navigation Component in a multi-module project.
+I also spent more time on design and the overall asthetics in this project. Another feature I'm proud of is using ItemTouchHelper to implement
+a swipe-to-delete function, as well as showing a classic "UNDO" snackbar for those pesky swiping mistakes!
+
+
+# Tech
+<h5>Material Design</h5> For predictable, well-designed and
+aesthetically pleasing user interfaces.
+<h5>Room</h5> A persistence library that provides an abstraction layer over SQLite to assist
+ in storing and retrieving lists of tide and tide station data after a network
+request. This enables it to remain a reliable source of information even offline.
+<h5>LiveData</h5> Used to emit and observe streams of data in realtime to update the UI while remaining
+LifeCycle aware.
+<h5>Kotlin Flow</> Flow is a "cold" stream that produces values asynchronously and sequentially. Super Cool! Built on
+  top of coroutines, it's my new favorite thing! Used to keep lifecycle-aware Livedata out of my repository layer.
+<h5>Coroutines</h5> Asynchronous operations handled by Kotlin Coroutines. Keeping database queries and
+other heavy lifting off of the main thread for an uninterrupted user experience while also
+reducing the need for callbacks.
+<h5>Dagger Hilt</h5> A fully static, compile-time Dependency Injection framework.
+<h5>MVVM</h5> ViewModel used to keep data alive and accessible through configuration and LifeCycle changes.
+<h5>RecyclerView</h5> Used to efficiently display variable lists with the help of DiffUtil to cut down on updating costs.
+<h5>Navigation Component</h5> Used to handle navigation and the passing of data between destinations
+<h5>Android KTX</h5> Helping to write more concise and idiomatic Kotlin code.
+
+
+# Screenshots
+<p align = "center">
+<img src = "listspiclight.png" height = "400" width = "200" >
+<img src = "taskspiclight.png" height = "400" width = "200" >
+<img src = "darkmodepic.png" height = "400" width = "200" >
+<img src = "addlistpic.png" height = "400" width = "200" >
+
+  </p>
+
+
+
+# License
+```
+MIT License
+
+Copyright (c) 2021 Joshua Swigut
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

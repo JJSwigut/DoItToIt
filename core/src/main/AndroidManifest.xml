@@ -1,1 +1,5 @@
-<manifest package="com.jjswigut.core" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jjswigut.core">
+
+    <uses-sdk android:minSdkVersion="27" />
+</manifest>
