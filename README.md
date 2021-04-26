@@ -12,22 +12,28 @@
 
 # Description
 
-DoitToit was made as part of a coding challenge for Branch Payments. Able to create many Lists of To-Dos, this wa a fun project that
-gave me the chance to learn some new things! I fell in love with Kotlin Flows while working on this project, as I hadn't previously implemented them in anything.
-I chose to use a modular architecture to separate concerns, but was excited to learn how to implement Navigation Component in a multi-module project.
-I also spent more time on design and the overall asthetics in this project. Another feature I'm proud of is using ItemTouchHelper to implement
-a swipe-to-delete function, as well as showing a classic "UNDO" snackbar for those pesky swiping mistakes!
+DoitToit was made as part of a coding challenge for Branch Payments. Able to create many Lists of To-Dos, I had a lot of fun with this project and it
+gave me the chance to learn some new things! Such as:
+- I fell in love with Kotlin Flows while working on this project, as I hadn't previously used them much. Asynchronous sequential streams for 
+ updates from the database!? Awesome!
+- I chose to use a modular architecture to separate concerns, but was excited to learn how to implement Navigation Component in a multi-module project.
+- I also spent more time on design and the overall asthetics in this project. Theme Inheritance, to be specific.
+- Another feature I'm proud of is using ItemTouchHelper to implement
+a swipe-to-delete function, as well as showing a classic "UNDO" snackbar for those pesky swiping mistakes! Cool!
 
 I did encounter a few struggles, the most disappointing being testing. I had planned to unit-test my ViewModels, and then do some instrumented tests
-on the databases. My hope was to assert that TaskEntity and ListEntity maintained integrity up on insertion and retrieval from the database using a FakeRepository.  As I began, I realized that the heavy use of Flow and LiveData in my app, testing would require some special provisions that I didn't have
-time to read up on. Another was in the checkboxes on the Tasks. When checked, they it updates var in the TaskEntity which is then updated in Room. The change in the database triggers a Flow collection and the list gets updated causing the item to be redrawn in the Recycler View and subsequently a quick flash. I thought about holding the value somewhere and updating room when the page was navigated away from. I realized this too late in the challenge to implement.
+on the databases. My hope was to assert that TaskEntity and ListEntity maintained integrity up on insertion and retrieval from the database using a 
+FakeRepository.  As I began, I realized that the with the  heavy use of Flow and LiveData in my app, testing would require some special provisions that I didn't 
+have time to read up on. Another was in the checkboxes on the Tasks. When checked, it updates a var in the TaskEntity and an onCheckChangedListener then updates it in Room. The change in the database triggers a Flow collection and the list gets updated causing the item to be redrawn in the Recycler View and subsequently a quick flash. I think the solution is holding the value somewhere and updating room when the page was navigated away from. I realized this too late in the challenge to implement.
+
+Last thing - I realize the logo should have had a hyphen "Do-it To-it" so it doesn't sound look like "dɔɪt tɔɪt"(phonetics). Capital I's look like l's in that font.
 
 
 # Tech
 <h5>Material Design</h5> For predictable, well-designed and
 aesthetically pleasing user interfaces.
 <h5>Room</h5> A persistence library that provides an abstraction layer over SQLite to assist
- in storing and retrieving lists of tide and tide station data after a network
+ in storing and retrieving lists and tasks.
 request. This enables it to remain a reliable source of information even offline.
 <h5>LiveData</h5> Used to emit and observe streams of data in realtime to update the UI while remaining
 LifeCycle aware.
