@@ -33,8 +33,7 @@ Last thing - I realize the logo should have had a hyphen "Do-it To-it" so it doe
 <h5>Material Design</h5> For predictable, well-designed and
 aesthetically pleasing user interfaces.
 <h5>Room</h5> A persistence library that provides an abstraction layer over SQLite to assist
- in storing and retrieving lists and tasks.
-request. This enables it to remain a reliable source of information even offline.
+ in storing and retrieving lists and tasks to the disk.
 <h5>LiveData</h5> Used to emit and observe streams of data in realtime to update the UI while remaining
 LifeCycle aware.
 <h5>Kotlin Flow</h5> Flow is a "cold" stream that produces values asynchronously and sequentially. Super Cool! Built on
